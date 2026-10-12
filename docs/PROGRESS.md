@@ -32,7 +32,14 @@ This file tracks the status of each implementation phase, acceptance criteria, a
   - [x] Simulation service orchestration (`tradelab/services/backtest_service.py`).
   - [x] Detailed assumptions documentation (`docs/BACKTEST_ASSUMPTIONS.md`).
   - [x] 49 tests passing with zero failures.
-- [ ] **Phase 4: Backtest Lab UI, persistence, and downloadable reports**
+- [x] **Phase 4: Backtest Lab UI, persistence, and downloadable reports**
+  - [x] SQLite database engine, session factory, and table schemas (`tradelab/storage/db.py`, `tradelab/storage/tables.py`).
+  - [x] `BacktestRepository` supporting atomic run/fill persistence, listing, filtering, and cascade deletion (`tradelab/storage/repository.py`).
+  - [x] Strategy visualizer with Fast/Slow SMA lines and BUY/SELL execution fill markers at next-open prices (`tradelab/ui/charts.py`).
+  - [x] Portfolio equity curve with Buy-and-Hold benchmark overlay and underwater drawdown chart (`tradelab/ui/charts.py`).
+  - [x] Complete interactive Backtest Lab (`pages/2_Backtest_Lab.py`) with input validation, KPI row, tabs, fills ledger, and CSV export.
+  - [x] Complete Trade History inspector (`pages/4_Trade_History.py`) with symbol filtering, sorting, run drill-down, and CSV export.
+  - [x] 52 tests passing with zero failures.
 - [ ] **Phase 5: Alpaca paper trading integration and safe bot controls**
 - [ ] **Phase 6: Quality, security, deployment, documentation, and resume demo**
 
@@ -48,11 +55,15 @@ This file tracks the status of each implementation phase, acceptance criteria, a
 
 ## Phase 3 Summary
 - **Status:** Complete & Verified.
+- **Implemented:** SMA crossover strategy, event-driven backtesting engine (next-bar open execution), accounting invariants, performance metrics, and buy-and-hold benchmark.
+
+## Phase 4 Summary
+- **Status:** Complete & Verified.
 - **Implemented:**
-  - Simple Moving Average crossover strategy detecting discrete transition events without lookahead bias.
-  - Event-driven backtesting engine ensuring signals generated on bar $t$ execute exclusively on bar $t+1$ Open with adverse slippage and fees.
-  - Realized round-trip trade analysis with paired entry/exit timestamps, fees, win rates (returns `None` when zero trades occur), and Sharpe ratio.
-  - Buy-and-hold benchmark matching cost and time assumptions.
-  - Complete assumptions document in `docs/BACKTEST_ASSUMPTIONS.md`.
+  - SQLite database layer using SQLAlchemy ORM for `backtest_runs`, `backtest_fills`, `paper_orders`, and `bot_events`.
+  - Transactional `BacktestRepository` handling atomic run and fill records.
+  - Visual charts for strategy execution markers, equity curve vs. benchmark, and drawdown curves.
+  - Interactive Backtest Lab with parameter sliders, real-time KPI metrics, fills ledger, and CSV export.
+  - Trade History browser with search/filter, run drilldown, and downloadable audit reports.
 - **Next Steps:**
-  - Begin Phase 4: Backtest Lab UI with parameter sliders, Plotly execution overlays, SQLite persistence using SQLAlchemy ORM, and CSV export.
+  - Begin Phase 5: Alpaca paper trading integration, account balance & positions telemetry, order preview, safe manual execution, and emergency stop controls.
