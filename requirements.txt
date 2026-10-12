@@ -1,0 +1,13 @@
+streamlit>=1.35.0
+pandas>=2.2.0
+numpy>=1.26.0
+plotly>=5.22.0
+yfinance>=0.2.40
+pydantic>=2.7.0
+pydantic-settings>=2.2.0
+python-dotenv>=1.0.1
+sqlalchemy>=2.0.30
+alpaca-py>=0.23.0
+pytest>=8.2.0
+pytest-mock>=3.14.0
+ruff>=0.4.0

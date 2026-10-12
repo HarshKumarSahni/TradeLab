@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tradelab"
+version = "0.1.0"
+description = "Algorithmic Trading & Paper Trading Workbench with Streamlit"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    { name = "Harsh Kumar Sahni" }
+]
+dependencies = [
+    "streamlit>=1.35.0",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "plotly>=5.22.0",
+    "yfinance>=0.2.40",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+    "python-dotenv>=1.0.1",
+    "sqlalchemy>=2.0.30",
+    "alpaca-py>=0.23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-mock>=3.14.0",
+    "ruff>=0.4.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tradelab*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B"]
+ignore = ["E501"]
