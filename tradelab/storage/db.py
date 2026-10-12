@@ -19,7 +19,7 @@ def get_engine(database_url: Optional[str] = None) -> Engine:
     """Get or create cached SQLAlchemy Engine by database URL."""
     url = database_url or get_settings().database_url
     if url not in _engines:
-        if url == "sqlite:///:memory:":
+        if "mode=memory" in url or url == "sqlite:///:memory:":
             _engines[url] = create_engine(
                 url,
                 connect_args={"check_same_thread": False},

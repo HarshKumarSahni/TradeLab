@@ -40,7 +40,14 @@ This file tracks the status of each implementation phase, acceptance criteria, a
   - [x] Complete interactive Backtest Lab (`pages/2_Backtest_Lab.py`) with input validation, KPI row, tabs, fills ledger, and CSV export.
   - [x] Complete Trade History inspector (`pages/4_Trade_History.py`) with symbol filtering, sorting, run drill-down, and CSV export.
   - [x] 52 tests passing with zero failures.
-- [ ] **Phase 5: Alpaca paper trading integration and safe bot controls**
+- [x] **Phase 5: Alpaca paper trading integration and safe bot controls**
+  - [x] Standardized broker contracts and interfaces (`tradelab/brokers/base.py`).
+  - [x] `MockPaperBroker` for 100% offline, deterministic simulated broker functionality (`tradelab/brokers/mock_broker.py`).
+  - [x] `AlpacaPaperBroker` with official `alpaca-py` SDK, strictly enforcing sandbox paper trading (`tradelab/brokers/alpaca_paper.py`).
+  - [x] `PaperTradingService` managing account balances, positions, order preview, and pre-trade risk checks (`tradelab/services/paper_service.py`).
+  - [x] `BotController` implementing discrete single-cycle evaluations, emergency kill switch, allocation caps, and idempotency guards (`tradelab/services/bot_controller.py`).
+  - [x] Interactive Paper Trading Dashboard (`pages/3_Paper_Trading.py`) with live telemetry, two-step order confirmation, positions table, order history, and dry-run controls.
+  - [x] 62 tests passing with zero failures.
 - [ ] **Phase 6: Quality, security, deployment, documentation, and resume demo**
 
 ---
@@ -59,11 +66,16 @@ This file tracks the status of each implementation phase, acceptance criteria, a
 
 ## Phase 4 Summary
 - **Status:** Complete & Verified.
+- **Implemented:** SQLite persistence for backtest runs and fills, Plotly strategy and equity charts, Backtest Lab UI, and Trade History audit browser with CSV exports.
+
+## Phase 5 Summary
+- **Status:** Complete & Verified.
 - **Implemented:**
-  - SQLite database layer using SQLAlchemy ORM for `backtest_runs`, `backtest_fills`, `paper_orders`, and `bot_events`.
-  - Transactional `BacktestRepository` handling atomic run and fill records.
-  - Visual charts for strategy execution markers, equity curve vs. benchmark, and drawdown curves.
-  - Interactive Backtest Lab with parameter sliders, real-time KPI metrics, fills ledger, and CSV export.
-  - Trade History browser with search/filter, run drilldown, and downloadable audit reports.
+  - Standardized broker interfaces (`PaperBroker`, `BrokerAccount`, `BrokerPosition`, `BrokerOrder`).
+  - `AlpacaPaperBroker` using official `alpaca-py` with hardcoded paper endpoint enforcement.
+  - In-memory `MockPaperBroker` for full offline functionality without external credentials.
+  - `PaperTradingService` with pre-trade checks (buying power, holding verification) and deterministic `client_order_id` generation.
+  - `BotController` for safe, single-cycle execution with emergency stop kill switch and rerun idempotency.
+  - Paper Trading UI with live account telemetry, two-step order confirmation, and discrete bot cycle runner.
 - **Next Steps:**
-  - Begin Phase 5: Alpaca paper trading integration, account balance & positions telemetry, order preview, safe manual execution, and emergency stop controls.
+  - Begin Phase 6: Quality, security scan, smoke test script, demo walkthrough guide, CI workflow, and final resume positioning.
